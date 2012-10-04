@@ -1,0 +1,8 @@
+MenuFreeze:on
+xterm*DeiconifyWarp:on
+xterm*JumpScroll:on
+xterm*scrollLines:300
+xterm*scrollBar:on
+xterm*scrollKey:on
+xterm*TextUnderIcon:off
+xterm*VisualBell:on

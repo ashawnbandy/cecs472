@@ -1,0 +1,14 @@
+
+--==Server==--
+Master socket: 3
+Bind returns: 0
+Listen returns: 0
+Client socket: 4
+(S)Read bytes: 80
+(S)Client sent: Client speaks
+(S)Write bytes: 80
+(S)Server replies with: Server replies
+(S)Read bytes: 80
+(S)Client sent: Message 2
+(S)Write bytes: 80
+(S)Server replies with: Server replies

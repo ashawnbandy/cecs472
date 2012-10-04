@@ -1,0 +1,65 @@
+/*
+ * A. Shawn Bandy
+ * CECS 472
+ * Assignment 6
+ * 09/10/2012
+*/
+
+#include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include <errno.h>
+#include <time.h>
+#include <arpa/inet.h>
+
+#include "connectTCP.c" //provides int connectTCP(host, service)
+
+#define UNIXEPOCH 2208988800UL
+#define MSG "Another walk about after dark/ It's my point of view\n"
+
+int main(int argc, char *argv[]) {
+	char	*host = "panther";
+	char	*service = "time";
+	int 	s,n;
+	time_t now;
+	
+	char buf[4];
+	int inchars;
+
+	switch(argc) {
+		case 1: 
+			break;
+		case 3: 
+			service = argv[2];
+			//fall through
+		case 2:
+			host = argv[1];
+			break;
+		default:
+			errexit("ERROR: Too many commmand line options.");
+	}
+//hard coded time has to go
+	s = connectTCP(host,service);
+	for(inchars=0;inchars<4;inchars+=n) {
+		n=read(s,&buf[inchars],4-inchars);
+		printf("%i(%i)|",n,((u_long)now));
+		if(n <= 0) errexit("ERROR: network read failed");
+	}
+	memcpy(&now,buf,4);
+	printf("> %i\n",now);
+	now = ntohl(now);
+	now -= UNIXEPOCH;
+	printf("%s (%i)",ctime(&now),now);
+	/*while(n = fread(s,1,sizeof(now),(char *)&now)) {
+		
+	}
+	
+	while( (n = read(s, (char *)&now, sizeof(now))) > 0);
+	now = ntohl((u_long)now);      // put in host byte order       
+	now -= UNIXEPOCH;              // convert UCT to UNIX epoch    
+	printf("%s", ctime(&now));
+	*/
+	exit(0);
+}
+

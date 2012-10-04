@@ -1,0 +1,12 @@
+\def\bsl{\char92}
+\def\lb{{\btt{}\char123}}
+\def\rb{{\btt{}\char125}}
+{\obeyspaces 
+\gdef\cprogram{ \begingroup\smallskip\tt\obeylines\parskip=0pt\catcode`\{=12
+\catcode`\}=12\catcode`\&=12\catcode`\$=12\catcode`\#=12\catcode`\_=12
+\catcode`\%=12\catcode`\^=12\catcode`\~=12\catcode`\@=0\catcode`\\=12
+\obeyspaces\let =\ }
+} 
+{\obeyspaces
+\gdef\ctt{\tt\catcode`\&=12\catcode`\$=12\catcode`\#=12\catcode`\_=12
+\catcode`\^=12\catcode`\%=12\catcode`\~=12\catcode`\\=12\obeyspaces\let =\ }} 

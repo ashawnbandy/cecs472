@@ -1,0 +1,4 @@
+set ask askcc
+set crt=22
+set hold
+set VISUAL=/usr/ucb/vi

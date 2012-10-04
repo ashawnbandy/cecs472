@@ -1,0 +1,10 @@
+--==Client==--
+Socket: 3
+(C)Client will send: Client speaks
+(C)Write bytes: 80
+(C)Read bytes: 80
+(C)Server replies with: Server replies
+(C)Client will send: Message 2
+(C)Write bytes: 80
+(C)Read bytes: 80
+(C)Server replies with: Server replies

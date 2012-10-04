@@ -1,0 +1,43 @@
+//A. Shawn Bandy
+//CECS 472
+//Assignment 3 - Client
+//09/05/2012
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <string.h>
+#include <stdio.h>
+#include <unistd.h>
+
+void rw(int fd, void *message, size_t count);
+
+int main() {
+  int s;
+  char message[80];
+  struct sockaddr_in      srv_addr;
+  
+  /* Get a socket. */
+  s = socket(PF_INET, SOCK_STREAM, 0);
+  printf("--==Client==--\nSocket: %i\n",s);
+  /* Put server's address into a socket structure */
+  memset(&srv_addr, 0, sizeof(srv_addr));
+  srv_addr.sin_addr.s_addr = htonl(0x868bf843);
+    /*134.139.248.67*/
+  srv_addr.sin_family = AF_INET;
+  srv_addr.sin_port = htons(7654);
+  /* Request the connection to the server */
+  connect(s, (struct sockaddr *) &srv_addr, sizeof(srv_addr));
+  strcpy(message,"Client speaks");
+  rw(s,message,80);
+  strcpy(message,"Message 2");
+  rw(s,message,80);
+  close(s);
+  return 1;
+}
+
+void rw(int s, void *message, size_t count) {
+	printf("(C)Client will send: %s\n", message);
+	printf("(C)Write bytes: %i\n", write(s,message,count));
+	printf("(C)Read bytes: %i\n", read(s,message,count));
+	printf("(C)Server replies with: %s\n",message);
+}

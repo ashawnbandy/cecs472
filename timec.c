@@ -1,0 +1,70 @@
+/* 
+ * A. Shawn Bandy
+ * CECS 472
+ * Assignment 7 - Client
+ *
+ * timec.c - main */
+
+#include <sys/types.h>
+
+#include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include <errno.h>
+#include <time.h>
+
+#define BUFSIZE 64
+
+#define UNIXEPOCH       2208988800UL      /* UNIX epoch, in UCT secs      */
+#define MSG             "what time is it?\n"
+
+#include "connectUDP.c"
+#include "get_port.c"
+
+/*  handled by the include
+ * int     connectUDP(const char *host, const char *service);
+ * int     errexit(const char *format, ...);
+ */
+int
+main(int argc, char *argv[])
+{
+        char    *host = "localhost";    /* host to use if none supplied */
+        char    *service = get_port();      /* default service name         */
+        struct  timeval    now;                    /* 32-bit integer to hold time  */ 
+        int     s, n;                   /* socket descriptor, read count*/
+	char    buf[8];
+
+        switch (argc) {
+        case 1:
+                break;
+        case 3:
+                service = argv[2];
+                /* FALL THROUGH */
+        case 2:
+                host = argv[1];
+                break;
+        default:
+                fprintf(stderr, "usage: UDPtime [host [port]]\n");
+                exit(1);
+        }
+
+	printf("Connecting to port: %s\n",get_port());
+
+        s = connectUDP(host, service);
+
+        (void) write(s, MSG, strlen(MSG));
+
+        /* Read the time */
+
+        n = read(s, (char *)&buf, sizeof(now));
+        if (n < 0)
+                errexit("read failed: %s\n", strerror(errno));
+        memcpy(&now.tv_sec,&buf,4);
+	memcpy(&now.tv_usec,&buf[4],4);
+	now.tv_sec = htonl(now.tv_sec);
+	now.tv_usec = htonl(now.tv_usec);
+	printf("%x %x\n",now.tv_sec,now.tv_usec);
+
+	exit(0);
+}

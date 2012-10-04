@@ -1,0 +1,43 @@
+\overfullrule=0pt
+\parindent=0pt
+\parskip=\medskipamount
+{\obeyspaces 
+\gdef\program{ \begingroup
+                   \smallskip
+                   \tt\obeylines\parskip=0pt
+                   \catcode`\{=12
+                   \catcode`\}=12
+                   \catcode`\&=12
+                   \catcode`\$=12
+                   \catcode`\#=12
+                   \catcode`\_=12
+                   \catcode`\%=12
+                   \catcode`\^=12
+                   \obeyspaces
+                   \let =\ } 
+}
+\def\endprogram{\endgroup}
+{\obeyspaces 
+\gdef\demo{ \begingroup
+                   \smallskip
+                   \tt\obeylines\parskip=0pt
+                   \catcode`\{=12
+                   \catcode`\}=12
+                   \catcode`\&=12
+                   \catcode`\$=12
+                   \catcode`\#=12
+                   \catcode`\_=12
+                   \catcode`\%=12
+                   \catcode`\^=12
+                   \catcode`\~=12
+                   \obeyspaces
+                   \let =\ } 
+} 
+\def\enddemo{\endgroup}
+{\obeyspaces 
+\gdef\ltt{\tt\catcode`\&=12\catcode`\$=12\catcode`\#=12\catcode`\_=12
+\catcode`\^=12\catcode`\%=12\catcode`\~=12\obeyspaces\let =\ }} 
+\font\tinyf=cmr10 at 6pt
+\def\topic#1{\bigskip {\it #1} \hfill \bigskip}
+\def\printpicture{\centerline{\box\graph}}
+\font\ttyfont=cmtt10 at 10pt
