@@ -12,12 +12,28 @@
 
 # Command Line History (newest to oldest):
 :wq
-:q
+:! gcc %
 :w
+:.!gcc %
+:.!
+:! date
+:!gcc %
+:W
+:'<,'>y
+:r copybuf
+:! gcc 
+:! cp ../get_port.c ./
+:r ../comer*/buf
+:r buf
+:! ls ..
+:! ls
+:shell
+:.
+:r ~/dummy
+:q
 :q!
 :t
 :WQ
-:W
 :r browser.c
 :r browserc.c
 :s
@@ -26,11 +42,21 @@
 :we
 :set cindent
 :'<,'>q
+:bp
+:e ~/12/copybuf
+:e ../12/copybuf
+:e buf
+:e ~/dummy
+:e
+:y
+:'<,'>
 
 # Search String History (newest to oldest):
+?/case
 ?/*
 ?/buf
-?/case
+?/hcount
+?/select
 
 # Expression History (newest to oldest):
 
@@ -39,46 +65,62 @@
 # Input Line History (newest to oldest):
 
 # Registers:
+"0	LINE	0
+						FD_CLR(ssock,&afds);
+						(void) close(ssock);
+						printf("Goodbye.\n");
+						exit(0);
 ""1	LINE	0
-	/* TCPmechod.c - main, echo */
+						printf("sending %s\n",buf);
 "2	LINE	0
-			printf("\n");
+						printf("closing\n");
 "3	LINE	0
-									printf("%i ",nfds);
+					printf("(network)(read %i bytes)",cc);
 "4	LINE	0
-									//clr and close fd2
+						printf("sending %s\n",buf);
 "5	LINE	0
-					//clr and close here fd
-	                		//errexit("echo read: %s\n", strerror(errno));
-	        			//if (cc && send(fd, buf, cc, 0) < 0)
-	                		//errexit("echo write: %s\n", strerror(errno));
+						printf("(closing)\n");
 "6	LINE	0
-	        return cc;
+					printf("(read %i bytes)",cc);
 "7	LINE	0
-	        int     cc;
+					printf("(keyboard)");
 "8	LINE	0
-	        char    buf[BUFSIZ];
+		timeout.tv_usec = 0;
 "9	LINE	0
-	
-	
+		timeout.tv_sec = 5;
 "q	CHAR	0
 	
 "-	CHAR	0
-	n
+		char buf[BUF
 
 # File marks:
-'0  78  15  ~/11/echod.c
-'1  57  9  ~/11/echod.c
-'2  66  23  ~/11/echod.c
-'3  98  6  ~/11/echod.c
-'4  95  8  ~/11/echod.c
-'5  43  23  ~/11/echod.c
-'6  96  25  ~/11/echod.c
-'7  99  0  ~/comer_examples/TCPmechod.c
-'8  2  0  ~/comer_examples/TCPmechod.c
-'9  1  0  ~/comer_examples/TCPtecho.c
+'0  92  5  ~/12/chatc.c
+'1  10  0  ~/comer_examples/TCPecho.c
+'2  70  0  ~/12/homework12.tex
+'3  78  15  ~/11/echod.c
+'4  57  9  ~/11/echod.c
+'5  66  23  ~/11/echod.c
+'6  98  6  ~/11/echod.c
+'7  95  8  ~/11/echod.c
+'8  43  23  ~/11/echod.c
+'9  96  25  ~/11/echod.c
 
 # Jumplist (newest first):
+-'  92  5  ~/12/chatc.c
+-'  98  0  ~/12/chatc.c
+-'  28  0  ~/12/chatc.c
+-'  80  3  ~/12/chatc.c
+-'  81  4  ~/12/chatc.c
+-'  96  2  ~/12/chatc.c
+-'  52  0  ~/12/chatc.c
+-'  54  0  ~/12/chatc.c
+-'  51  32  ~/12/chatc.c
+-'  25  27  ~/12/chatc.c
+-'  1  1  ~/12/chatc.c
+-'  10  0  ~/comer_examples/TCPecho.c
+-'  1  0  ~/comer_examples/TCPecho.c
+-'  70  0  ~/12/homework12.tex
+-'  1  0  ~/12/homework12.tex
 -'  78  15  ~/11/echod.c
 -'  57  9  ~/11/echod.c
 -'  66  23  ~/11/echod.c
@@ -163,25 +205,116 @@
 -'  61  34  ~/7/UDPtimed.c
 -'  34  0  ~/7/UDPtimed.c
 -'  62  0  ~/7/UDPtimed.c
--'  36  36  ~/7/UDPtimed.c
--'  37  0  ~/7/UDPtimed.c
--'  1  0  ~/7/UDPtimed.c
--'  1  0  ~/7/UDPtimd.c
--'  51  23  ~/comer_examples/TCPtime.c
--'  27  5  ~/comer_examples/TCPtime.c
--'  49  12  ~/comer_examples/TCPtime.c
--'  46  34  ~/comer_examples/TCPtime.c
--'  28  10  ~/comer_examples/TCPtime.c
--'  30  1  ~/comer_examples/TCPtime.c
--'  25  7  ~/comer_examples/TCPtime.c
--'  50  17  ~/comer_examples/TCPtime.c
--'  15  0  ~/comer_examples/TCPtime.c
--'  45  14  ~/comer_examples/TCPtime.c
 
 # History of marks within files (newest to oldest):
 
+> ~/12/chatc.c
+	"	92	5
+	^	74	31
+	.	92	0
+	+	80	12
+	+	81	0
+	+	81	10
+	+	73	0
+	+	85	0
+	+	74	12
+	+	85	42
+	+	93	6
+	+	85	39
+	+	93	6
+	+	96	1
+	+	87	1
+	+	92	30
+	+	74	34
+	+	85	38
+	+	87	4
+	+	91	3
+	+	87	25
+	+	90	12
+	+	89	22
+	+	87	4
+	+	80	0
+	+	76	0
+	+	76	0
+	+	81	4
+	+	82	0
+	+	81	30
+	+	60	12
+	+	36	0
+	+	97	0
+	+	97	0
+	+	96	0
+	+	83	4
+	+	62	5
+	+	36	24
+	+	97	10
+	+	98	0
+	+	98	0
+	+	62	18
+	+	36	0
+	+	98	0
+	+	70	40
+	+	73	2
+	+	95	0
+	+	73	24
+	+	84	28
+	+	94	3
+	+	95	1
+	+	73	23
+	+	84	27
+	+	74	38
+	+	85	42
+	+	60	0
+	+	65	0
+	+	64	5
+	+	63	25
+	+	64	26
+	+	63	3
+	+	64	2
+	+	63	13
+	+	64	9
+	+	75	0
+	+	74	3
+	+	37	0
+	+	75	1
+	+	74	1
+	+	75	4
+	+	74	33
+	+	75	8
+	+	86	0
+	+	85	37
+	+	86	9
+	+	85	12
+	+	74	31
+	+	81	14
+	+	74	0
+	+	74	24
+	+	75	29
+	+	81	21
+	+	92	17
+	+	76	9
+	+	75	30
+	+	76	26
+	+	81	31
+	+	87	5
+	+	86	4
+	+	86	0
+	+	86	23
+	+	87	22
+	+	86	0
+	+	86	39
+	+	87	21
+	+	92	31
+	+	74	0
+	+	75	0
+	+	76	0
+	+	81	0
+	+	86	0
+	+	87	0
+	+	92	0
+
 > ~/11/echod.c
-	"	78	15
+	"	105	0
 	^	78	16
 	.	78	16
 	+	23	20
@@ -285,14 +418,37 @@
 	+	66	2
 	+	78	16
 
+> ~/12/homework12.tex
+	"	51	0
+
+> ~/comer_examples/TCPtecho.c
+	"	94	0
+	^	99	21
+
+> ~/comer_examples/buf
+	"	2	0
+	.	2	0
+	+	2	0
+
+> ~/12/copybuf
+	"	1	0
+
+> ~/homework12.tex
+	"	1	0
+
+> ~/comer_examples/TCPecho.c
+	"	47	0
+
+> ~/dummy
+	"	2	0
+	.	2	0
+	+	2	0
+
 > ~/11/TCPmechod.c
 	"	99	0
 
 > ~/comer_examples/TCPmechod.c
 	"	99	0
-
-> ~/comer_examples/TCPtecho.c
-	"	1	0
 
 > ~/11/homework11.tex
 	"	88	0

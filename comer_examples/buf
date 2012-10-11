@@ -1,0 +1,22 @@
+
+int
+TCPtecho(fd_set *pafds, int nfds, int ccount, int hcount)
+{
+        fd_set  rfds, wfds;             /* read/write fd sets           */
+        fd_set  rcfds, wcfds;           /* read/write fd sets (copy)    */
+        int     fd, i;
+
+        for (i=0; i<BUFSIZE; ++i)       /* echo data    */
+                buf[i] = 'D';
+        memcpy(&rcfds, pafds, sizeof(rcfds));
+        memcpy(&wcfds, pafds, sizeof(wcfds));
+        for (fd=0; fd<nfds; ++fd)
+                rc[fd] = wc[fd] = ccount;
+
+        (void) mstime((u_long *)0);     /* set the epoch */
+
+        while (hcount) {
+                memcpy(&rfds, &rcfds, sizeof(rfds));
+                memcpy(&wfds, &wcfds, sizeof(wfds));
+
+                if (select(nfds, &rfds, &wfds, (fd_set *)0,
