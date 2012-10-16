@@ -1,0 +1,8 @@
+
+                (void) gettimeofday(&now,NULL);
+		printf("%x %x\n",now.tv_sec,now.tv_usec);
+		
+		now.tv_sec = htonl(now.tv_sec);
+		now.tv_usec = htonl(now.tv_usec);
+		memcpy(&out_buf,&now.tv_sec,4);
+		memcpy(&out_buf[4],&now.tv_usec,4);

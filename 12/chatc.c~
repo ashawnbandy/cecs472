@@ -13,7 +13,7 @@
 #include <errno.h>
 #include <signal.h>
 #include <sys/time.h>
-
+#include <sys/socket.h>
 int     TCPecho(const char *host, const char *service);
 #include "connectTCP.c"
 #include "get_port.c"
@@ -71,14 +71,12 @@ int main(int argc, char *argv[])
 			printf("Are you there?\n");
 		} else {
 			if(FD_ISSET(0,&rfds)) { 
-				cc = read(0,buf,sizeof(buf));
-				if(cc <= 0) {
-					FD_CLR(ssock,&afds);
-					(void) close(ssock);
-					printf("Goodbye.\n");
-					exit(0);
+				if(fgets(buf,sizeof(buf),stdin) != NULL) {
+					send(ssock,buf,strlen(buf),0);
 				} else {
-					send(ssock,buf,cc,0);
+					FD_CLR(0,&afds);
+					(void) close(0);
+					shutdown(ssock,SHUT_WR);
 				}
 			}
 			if(FD_ISSET(ssock,&rfds)) {
@@ -86,8 +84,6 @@ int main(int argc, char *argv[])
 				if(cc <= 0) {
 					FD_CLR(ssock,&afds);
 					(void) close(ssock);
-					printf("Goodbye.\n");
-					exit(0);
 				} else {
 					printf("%s",buf);
 				}
