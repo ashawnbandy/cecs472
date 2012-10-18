@@ -1,0 +1,5 @@
+
+			if (recvfrom(usock, buf, sizeof(buf), 0,
+				(struct sockaddr *)&fsin, &alen) < 0)
+				errexit("recvfrom: %s\n",
+					strerror(errno));

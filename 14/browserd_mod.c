@@ -1,6 +1,7 @@
 /* A. Shawn Bandy F1
  * CECS472
  * Assigment 9 - Server (corrected)
+ * Assignment 14 - MODIFIED
  * 09/21/2012
 */
 #include <signal.h>
@@ -24,78 +25,41 @@ void command_list(int fd);
 void command_print_cwd(int fd);
 void command_change_directory(int fd, char * dir);
 void command_get_file(int fd,const char * filename);
-void reaper();
 
-int main(int argc, char *argv[])
-{
-        struct  sockaddr_in fsin;       /* the from address of a client */
-        char    *service = get_port();   /* service name or port number  */
-        int     msock, ssock;           /* master & slave sockets       */
-        int     alen;                   /* from-address length          */
-	int childpid;
-
-	signal(SIGPIPE,SIG_IGN);
-	signal(SIGCHLD,reaper);
-        switch (argc) {
-        case    1:
-                break;
-        case    2:
-                service = argv[1];
-                break;
-        default:
-                errexit("<klaxon>\n");
-        }
-
-        msock = passiveTCP(service, QLEN);
-	
-	printf("Server listening on:  %s\n",get_port());
-	alen = sizeof(fsin);
-
-	//the parent process stays within the while loop and the child processes fall through
-	while (  
-		((ssock = accept(msock, (struct sockaddr *)&fsin, &alen)) >= 0) &&
-		((childpid = fork()) > 0)
-	      ) { close(ssock); }
-	printf("alen: %i\tssock: %i\tchildpid: %i\n",alen,ssock,childpid);
-	if(childpid == 0) {
-		close(msock);
-		while(serv(ssock));
-		exit(0);
-	} else errexit("<beep>");
-}
 // This is the service loop (essentially the inside of the while(1)
 int serv(int fd) {
-	char * wd;
-	char buf[1024] = {};
-	int i = 0;
-	int n = 0;
-	char dir[1022] = {};
-	
-
+	char buf[1024]={};
 	do {
-		n = read(fd,&buf[i],sizeof(buf)-i);
-		i += n;
-	} while (i < sizeof(buf) && buf[i-1] != '\0');
-	if(n < 0) errexit("read problem");
+		char * wd;
+		int i = 0;
+		int n = 0;
+		char dir[1022] = {};
+		do {
+			n = read(fd,&buf[i],sizeof(buf)-i);
+			i += n;
+		} while (i < sizeof(buf) && buf[i-1] != '\0');
+		if(n < 0) errexit("read problem");
 
 //	printf("i: %i,n: %i,buf: %s\n",i,n,buf);
 	
-	switch(buf[0]) {
-		case 'l':
-			command_list(fd);
-			break;
-		case 'p':
-			command_print_cwd(fd);
-			break;
-		case 'c':
-			command_change_directory(fd,&buf[2]);
-			break;
-		case 'g':
-			command_get_file(fd,&buf[2]);
-			break;
-		default:
-			break;
-	}
+		switch(buf[0]) {
+			case 'l':
+				command_list(fd);
+				break;
+			case 'p':
+				command_print_cwd(fd);
+				break;
+			case 'c':
+				command_change_directory(fd,&buf[2]);
+				break;
+			case 'g':
+				command_get_file(fd,&buf[2]);
+				break;
+			default:
+				buf[0] = '\0';
+				break;
+		}
+	} while (buf[0] != '\0');
 	return 1;
 }
 
@@ -151,9 +115,4 @@ void command_get_file(int fd,const char * filename) {
           transferCount += readSize;
         }
         close(src_fd);
-}
-void reaper() {
-	int status;
-	while(wait3(&status, WNOHANG, NULL > 0));
-	(void) signal(SIGCHLD,reaper);
 }

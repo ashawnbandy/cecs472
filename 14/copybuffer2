@@ -1,0 +1,9 @@
+
+	char	buf[8];		/* buffer for one line of text	*/
+	struct sockaddr_in fsin;	/* the request from address	*/
+	int	alen;			/* from-address length		*/
+	int	tsock; 			/* TCP master socket		*/
+	int	usock;			/* UDP socket			*/
+	int	nfds;
+	fd_set	rfds;			/* readable file descriptors	*/
+

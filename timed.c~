@@ -4,7 +4,7 @@
  * Assignment 7 - Server
  * 09/18/2012
  *
- * UDPtimed.c - main */
+ * timed.c - main */
 
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -25,10 +25,6 @@
 
 #define UNIXEPOCH       2208988800UL      /* UNIX epoch, in UCT secs      */
 
-/*------------------------------------------------------------------------
- * main - Iterative UDP server for TIME service
- *------------------------------------------------------------------------
- */
 int
 main(int argc, char *argv[])
 {
@@ -60,7 +56,7 @@ main(int argc, char *argv[])
                                 (struct sockaddr *)&fsin, &alen) < 0)
                         errexit("recvfrom: %s\n", strerror(errno));
                 (void) gettimeofday(&now,NULL);
-		printf("!!!%x %x\n",now.tv_sec,now.tv_usec);
+		printf("%x %x\n",now.tv_sec,now.tv_usec);
 		
 		now.tv_sec = htonl(now.tv_sec);
 		now.tv_usec = htonl(now.tv_usec);
@@ -68,11 +64,5 @@ main(int argc, char *argv[])
 		memcpy(&out_buf[4],&now.tv_usec,4);
 		(void) sendto(sock, &out_buf, sizeof(out_buf),0,(struct sockaddr*)&fsin,sizeof(fsin));
 		
-		/*	
-		(void) time(&now);
-                now = htonl((u_long)(now + UNIXEPOCH));
-                (void) sendto(sock, (char *)&now, sizeof(now), 0,
-                        (struct sockaddr *)&fsin, sizeof(fsin));
-        	*/
 	}
 }
