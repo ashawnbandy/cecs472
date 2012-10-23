@@ -1,0 +1,4 @@
+  To build client (vectorc)
+gcc vector_client.c vector_clnt.c vector_cif.c vector_xdr.c -o vectorc
+  To build server (vectors)
+gcc vector_services.c vector_svc.c vector_sif.c vector_xdr.c -o vectors

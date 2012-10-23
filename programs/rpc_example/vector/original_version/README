@@ -1,0 +1,3 @@
+  To build
+gcc  vector_services.c vector_client.c
+  generates a.out (executable)

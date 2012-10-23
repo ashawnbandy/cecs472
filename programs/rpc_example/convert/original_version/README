@@ -1,0 +1,2 @@
+To build type:
+gcc convert_client.c convert_services.c

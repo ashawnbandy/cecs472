@@ -1,0 +1,2 @@
+gcc convert_client.c convert_cif.c convert_clnt.c -o convertc
+gcc convert_services.c convert_sif.c convert_svc.c -o converts

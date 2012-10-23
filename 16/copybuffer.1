@@ -1,0 +1,9 @@
+
+        n = read(s, (char *)&buf, sizeof(now));
+        if (n < 0)
+                errexit("read failed: %s\n", strerror(errno));
+        memcpy(&now.tv_sec,&buf,4);
+	memcpy(&now.tv_usec,&buf[4],4);
+	now.tv_sec = htonl(now.tv_sec);
+	now.tv_usec = htonl(now.tv_usec);
+	printf("%x %x\n",now.tv_sec,now.tv_usec);

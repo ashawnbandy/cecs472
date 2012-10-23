@@ -8,15 +8,22 @@
 # hlsearch on (H) or off (h):
 ~h
 # Last Search Pattern:
-~MSle0~/now
+~MSle0~/TCPecho
 
 # Command Line History (newest to oldest):
-:q
 :wq
 :w
+:q
 :! gcc %
-:e services.c
+:r ../14/copybuffer1
+:r copybuffer.1
+:e copybuffer.1
 :'<,'>y
+:r ../12/chatc.c
+:q!
+:r ../timec.c
+:r ../timed.c
+:e services.c
 :bp
 :e copybuffer
 :.!gcc %
@@ -34,7 +41,6 @@
 :shell
 :.
 :r ~/dummy
-:q!
 :t
 :WQ
 :r browser.c
@@ -55,14 +61,9 @@
 :! gcc *
 :r copybuffer
 :r
-:! cc %
-:r daytimed.c
-:r ../comer*/superd.c
-:Q
-:e copybuffer2
-:r copybuffer1
 
 # Search String History (newest to oldest):
+?/TCPecho
 ?/now
 ?/case
 ?/*
@@ -79,6 +80,7 @@
 ? \<struct\>
 ?/sock
 ?/recv
+?/se
 
 # Expression History (newest to oldest):
 
@@ -87,59 +89,77 @@
 # Input Line History (newest to oldest):
 
 # Registers:
-""0	LINE	0
-	
-	int
-	Ttimed(int fd)
-	{
-		char buf[8];
-		struct timeval now;
-	
-		(void) gettimeofday(&now,NULL);
-		printf("%x %x\n",now.tv_sec,now.tv_usec);
+"0	LINE	0
+	        n = read(s, (char *)&buf, sizeof(now));
+	        if (n < 0)
+	                errexit("read failed: %s\n", strerror(errno));
+	        memcpy(&now.tv_sec,&buf,4);
+		memcpy(&now.tv_usec,&buf[4],4);
 		now.tv_sec = htonl(now.tv_sec);
 		now.tv_usec = htonl(now.tv_usec);
-		memcpy(&buf,&now.tv_sec,4);
-		memcpy(&buf[4],&now.tv_usec,4);
-		(void) write(fd, buf, 8);
-	        return 0;
-	}
-"1	LINE	0
-						exit(0);
+		printf("%x %x\n",now.tv_sec,now.tv_usec);
+""1	LINE	0
+							shutdown(ssock,SHUT_WR);
 "2	LINE	0
-						(void) close(0);
+					
 "3	LINE	0
-						FD_CLR(0,&afds);
+						strerror(errno));
 "4	LINE	0
-						shutdown(sddsock,SHUT_WR);
+					
 "5	LINE	0
-						printf("Goodbye.\n");
+	        			cc = read(s, (char *)&buf, sizeof(now));
 "6	LINE	0
-						printf("Goodbye.\n");
+	                /* FALL THROUGH */
 "7	LINE	0
-					} else {
+	                			errexit("read failed: %s\n", strerror(errno));
 "8	LINE	0
-						send(ssock,buf,cc,0);
+	int     TCPecho(const char *host, const char *service);
 "9	LINE	0
-					}
+			timeout.tv_usec = 0;
 "q	CHAR	0
 	
 "-	CHAR	0
-	,
+	s
 
 # File marks:
-'0  1  0  ~/15/homework15.tex
-'1  22  0  ~/14/homework14.tex
-'2  68  0  ~/timed.c
-'3  10  0  ~/14/services.c
-'4  19  0  ~/14/services.c
-'5  72  0  ~/8/Ttimed.c
-'6  104  0  ~/13/daytimed.c
-'7  61  12  ~/8/Ttimed.c
-'8  1  0  ~/7/UDPtimed.c
-'9  59  2  ~/7/timed.c
+'0  36  19  ~/16/mtimes.c
+'1  38  41  ~/16/mtimes.c
+'2  48  13  ~/16/mtimes.c
+'3  78  0  ~/16/homework16.tex
+'4  92  13  ~/15/btimec.c
+'5  2  8  ~/15/copybuffer.1
+'6  1  0  ~/15/ttimec.c
+'7  16  15  ~/14/services.c
+'8  59  0  ~/timec.c
+'9  19  0  ~/15/btimec.c
 
 # Jumplist (newest first):
+-'  36  19  ~/16/mtimes.c
+-'  38  41  ~/16/mtimes.c
+-'  48  13  ~/16/mtimes.c
+-'  1  0  ~/16/mtimes.c
+-'  78  0  ~/16/homework16.tex
+-'  92  13  ~/15/btimec.c
+-'  19  0  ~/15/btimec.c
+-'  2  8  ~/15/copybuffer.1
+-'  60  0  ~/timec.c
+-'  59  0  ~/timec.c
+-'  1  0  ~/15/ttimec.c
+-'  16  15  ~/14/services.c
+-'  56  0  ~/timec.c
+-'  17  19  ~/15/btimec.c
+-'  122  0  ~/15/btimec.c
+-'  27  0  ~/15/btimec.c
+-'  123  0  ~/15/btimec.c
+-'  121  1  ~/15/btimec.c
+-'  76  17  ~/15/btimec.c
+-'  95  3  ~/15/btimec.c
+-'  1  0  ~/15/btimec.c
+-'  175  12  ~/15/btimec.c
+-'  53  53  ~/15/btimed.c
+-'  54  2  ~/15/btimed.c
+-'  1  0  ~/15/btimed.c
+-'  76  0  ~/15/homework15.tex
 -'  1  0  ~/15/homework15.tex
 -'  22  0  ~/14/homework14.tex
 -'  68  0  ~/timed.c
@@ -209,93 +229,229 @@
 -'  1  0  ~/Timed.c
 -'  1  0  ~/Ttimec.c
 -'  23  0  ~/comer_examples/UDPtimed.c
--'  1  0  ~/comer_examples/UDPtimed.c
--'  1  0  ~/9/UDPdaytime.c
--'  1  0  ~/9/primitive_client.c
--'  81  1  ~/9/browserd.c
--'  1  0  ~/9/browserd.c
--'  142  41  ~/9/tbrowser.c
--'  141  10  ~/9/tbrowser.c
--'  136  21  ~/9/tbrowser.c
--'  150  0  ~/9/tbrowser.c
--'  152  6  ~/9/tbrowser.c
--'  112  7  ~/9/tbrowser.c
--'  67  20  ~/9/tbrowser.c
--'  76  46  ~/9/tbrowser.c
--'  75  1  ~/9/tbrowser.c
--'  77  8  ~/9/tbrowser.c
--'  54  0  ~/9/TCPtime.c
--'  1  0  ~/9/TCPtime.c
--'  1  0  ~/9/TCPtimed.c
--'  53  16  ~/9/tbrowser.c
--'  81  0  ~/9/browser.c
--'  1  0  ~/9/browser.c
--'  67  15  ~/8/Ttimed.c
--'  23  23  ~/8/Ttimec.c
--'  50  27  ~/8/Ttimec.c
--'  51  15  ~/8/Ttimec.c
--'  65  15  ~/8/Ttimed.c
--'  1  0  ~/8/Ttimec.d
--'  69  8  ~/8/Ttimed.c
--'  1  0  ~/8/Timed.c
+-'  1  0  ~/16/homework16.tex
+-'  76  0  ~/15/homework15.tex
+-'  1  0  ~/15/homework15.tex
 
 # History of marks within files (newest to oldest):
 
-> ~/15/homework15.tex
-	"	1	0
+> ~/16/mtimes.c
+	"	36	19
+	^	36	20
+	.	36	19
+	+	36	8
+	+	48	13
+	+	47	21
+	+	41	19
+	+	47	2
+	+	38	41
+	+	48	2
+	+	36	19
 
-> ~/14/homework14.tex
-	"	22	0
+> ~/16/homework16.tex
+	"	78	0
 
-> ~/14/multid.c
-	"	43	21
-	^	43	22
-	.	43	21
-	+	6	0
-	+	5	2
-	+	82	0
-	+	43	0
-	+	41	20
-	+	48	1
-	+	57	0
-	+	58	0
-	+	58	25
-	+	59	37
-	+	61	0
+> ~/16/multirecv.c
+	"	16	0
+	^	16	0
+	.	15	19
+	+	7	0
+	+	6	2
+	+	15	21
+	+	71	1
+	+	72	0
+	+	30	0
+	+	30	0
+	+	28	20
+	+	37	43
+	+	39	0
+	+	48	0
+	+	61	74
+	+	68	3
+	+	62	3
+	+	62	3
+	+	61	26
+	+	63	0
+	+	62	3
+	+	63	0
+	+	68	0
+	+	71	0
+	+	69	2
+	+	70	2
+	+	15	19
+
+> ~/16/multisend.c
+	"	24	1
+	^	24	2
+	.	24	2
+	+	17	20
+	+	1	2
+	+	6	3
+	+	33	44
+	+	34	0
+	+	35	2
+	+	42	68
+	+	42	94
+	+	43	5
+	+	43	58
+	+	43	55
+	+	44	2
+	+	46	2
+	+	47	1
+	+	35	0
+	+	35	0
+	+	35	4
+	+	35	3
+	+	41	2
+	+	36	2
 	+	41	0
-	+	42	20
-	+	63	3
-	+	43	21
-	+	61	29
-	+	128	0
-	+	128	63
-	+	128	1
-	+	123	26
-	+	123	25
-	+	128	66
-	+	128	14
-	+	128	43
-	+	146	26
-	+	155	30
-	+	31	37
-	+	45	43
-	+	128	0
-	+	128	7
-	+	31	38
-	+	155	26
-	+	128	61
-	+	31	21
-	+	128	26
-	+	128	0
-	+	129	0
-	+	123	25
-	+	123	15
+	+	36	0
+	+	36	0
+	+	37	1
+	+	36	25
+	+	41	1
+	+	46	1
+	+	41	0
+	+	36	0
+	+	41	3
+	+	42	0
+	+	42	92
+	+	43	58
+	+	43	57
 	+	46	0
-	+	129	0
-	+	124	7
-	+	122	10
-	+	146	22
-	+	43	21
+	+	43	53
+	+	42	27
+	+	42	63
+	+	41	0
+	+	43	57
+	+	43	6
+	+	42	88
+	+	44	3
+	+	45	10
+	+	35	0
+	+	36	0
+	+	23	2
+	+	26	0
+	+	23	20
+	+	15	17
+	+	25	0
+	+	24	2
+
+> ~/timed.c
+	"	53	0
+
+> ~/16/copybuffer.2
+	"	2	8
+	.	2	0
+	+	2	0
+
+> ~/15/btimec.c
+	"	92	13
+	^	92	14
+	.	92	13
+	+	64	0
+	+	63	1
+	+	59	18
+	+	63	1
+	+	36	0
+	+	33	35
+	+	63	40
+	+	34	12
+	+	63	59
+	+	33	17
+	+	68	0
+	+	67	40
+	+	94	0
+	+	94	0
+	+	94	0
+	+	93	0
+	+	94	0
+	+	85	20
+	+	94	0
+	+	85	4
+	+	86	5
+	+	87	6
+	+	88	6
+	+	89	5
+	+	90	6
+	+	91	6
+	+	93	6
+	+	117	21
+	+	83	0
+	+	121	2
+	+	122	1
+	+	123	0
+	+	122	1
+	+	123	0
+	+	122	0
+	+	123	1
+	+	123	0
+	+	122	0
+	+	123	0
+	+	122	0
+	+	123	0
+	+	122	0
+	+	95	3
+	+	121	0
+	+	94	3
+	+	123	0
+	+	81	50
+	+	78	0
+	+	33	12
+	+	17	0
+	+	111	0
+	+	96	35
+	+	119	5
+	+	110	0
+	+	96	34
+	+	96	34
+	+	99	10
+	+	99	10
+	+	104	18
+	+	104	10
+	+	105	3
+	+	106	3
+	+	107	3
+	+	108	3
+	+	99	23
+	+	109	5
+	+	103	0
+	+	104	0
+	+	103	11
+	+	102	12
+	+	104	11
+	+	105	4
+	+	106	4
+	+	107	4
+	+	108	4
+	+	40	2
+	+	52	9
+	+	46	0
+	+	54	0
+	+	28	10
+	+	59	2
+	+	57	5
+	+	99	12
+	+	96	38
+	+	99	12
+	+	99	0
+	+	96	38
+	+	96	34
+	+	97	3
+	+	98	4
+	+	99	4
+	+	97	8
+	+	99	0
+	+	98	37
+	+	96	34
+	+	97	18
+	+	97	19
+	+	30	18
+	+	93	0
+	+	92	13
+
+> ~/15/homework15.tex
+	"	76	0
 
 > ~/14/services.c
 	"	16	15
@@ -349,78 +505,25 @@
 	+	8	16
 	+	16	15
 
-> ~/UTtimed.c
-	"	38	1
+> ~/timec.c
+	"	60	0
 
-> ~/14/copybuffer2
-	"	2	1
+> ~/15/copybuffer.1
+	"	2	8
 	.	2	0
 	+	2	0
 
-> ~/14/copybuffer1
+> ~/15/ttimec.c
 	"	1	0
-	.	2	0
-	+	2	0
 
-> ~/14/browserd.c
-	"	23	14
-	^	23	15
-	.	23	15
-	+	83	0
-	+	28	0
-	+	28	0
-	+	119	0
-	+	4	26
-	+	32	0
-	+	37	1
-	+	38	1
-	+	39	1
-	+	40	3
-	+	41	1
-	+	45	1
-	+	46	2
-	+	47	3
-	+	48	3
-	+	49	2
-	+	50	3
-	+	51	3
-	+	52	2
-	+	53	3
-	+	54	3
-	+	55	2
-	+	56	3
-	+	57	3
-	+	58	2
-	+	60	3
-	+	61	3
-	+	62	13
-	+	59	17
-	+	62	0
-	+	32	4
-	+	62	25
-	+	36	21
-	+	31	0
-	+	31	0
-	+	35	11
-	+	31	0
-	+	36	0
-	+	36	0
-	+	31	13
-	+	36	0
-	+	31	5
-	+	30	23
-	+	23	31
-	+	30	14
-	+	23	15
+> ~/11/TCPmechod.c
+	"	99	0
 
-> ~/timed.c
-	"	68	0
-
-> ~/7/multid.c
+> /net/cheetah/u3/c/csa472/ttimec.c
 	"	1	0
 
 > ~/12/chatc.c
-	"	95	0
+	"	61	8
 	^	87	13
 	.	87	12
 	+	94	10
@@ -524,6 +627,141 @@
 	+	61	15
 	+	87	12
 
+> ~/15/btimed.c
+	"	53	53
+	^	53	54
+	.	53	53
+	+	2	0
+	+	5	28
+	+	8	3
+	+	55	0
+	+	53	61
+	+	54	54
+	+	54	2
+	+	53	18
+	+	54	0
+	+	53	53
+
+> ~/14/homework14.tex
+	"	22	0
+
+> ~/14/multid.c
+	"	43	21
+	^	43	22
+	.	43	21
+	+	6	0
+	+	5	2
+	+	82	0
+	+	43	0
+	+	41	20
+	+	48	1
+	+	57	0
+	+	58	0
+	+	58	25
+	+	59	37
+	+	61	0
+	+	41	0
+	+	42	20
+	+	63	3
+	+	43	21
+	+	61	29
+	+	128	0
+	+	128	63
+	+	128	1
+	+	123	26
+	+	123	25
+	+	128	66
+	+	128	14
+	+	128	43
+	+	146	26
+	+	155	30
+	+	31	37
+	+	45	43
+	+	128	0
+	+	128	7
+	+	31	38
+	+	155	26
+	+	128	61
+	+	31	21
+	+	128	26
+	+	128	0
+	+	129	0
+	+	123	25
+	+	123	15
+	+	46	0
+	+	129	0
+	+	124	7
+	+	122	10
+	+	146	22
+	+	43	21
+
+> ~/UTtimed.c
+	"	38	1
+
+> ~/14/copybuffer2
+	"	2	1
+	.	2	0
+	+	2	0
+
+> ~/14/copybuffer1
+	"	1	0
+	.	2	0
+	+	2	0
+
+> ~/14/browserd.c
+	"	23	14
+	^	23	15
+	.	23	15
+	+	83	0
+	+	28	0
+	+	28	0
+	+	119	0
+	+	4	26
+	+	32	0
+	+	37	1
+	+	38	1
+	+	39	1
+	+	40	3
+	+	41	1
+	+	45	1
+	+	46	2
+	+	47	3
+	+	48	3
+	+	49	2
+	+	50	3
+	+	51	3
+	+	52	2
+	+	53	3
+	+	54	3
+	+	55	2
+	+	56	3
+	+	57	3
+	+	58	2
+	+	60	3
+	+	61	3
+	+	62	13
+	+	59	17
+	+	62	0
+	+	32	4
+	+	62	25
+	+	36	21
+	+	31	0
+	+	31	0
+	+	35	11
+	+	31	0
+	+	36	0
+	+	36	0
+	+	31	13
+	+	36	0
+	+	31	5
+	+	30	23
+	+	23	31
+	+	30	14
+	+	23	15
+
+> ~/7/multid.c
+	"	1	0
+
 > ~/12/chat.c
 	"	1	0
 
@@ -597,9 +835,6 @@
 
 > ~/Ttimec.c
 	"	23	0
-
-> ~/timec.c
-	"	11	0
 
 > ~/TCPtime.c
 	"	22	5
@@ -855,9 +1090,6 @@
 	"	2	0
 	.	2	0
 	+	2	0
-
-> ~/11/TCPmechod.c
-	"	99	0
 
 > ~/comer_examples/TCPmechod.c
 	"	99	0

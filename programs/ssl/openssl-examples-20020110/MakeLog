@@ -1,0 +1,14 @@
+gcc -g -I/usr/include  -Wall    -c -o wclient.o wclient.c
+gcc -g -I/usr/include  -Wall    -c -o client.o client.c
+gcc -g -I/usr/include  -Wall    -c -o common.o common.c
+gcc wclient.o client.o common.o  -o wclient -L/usr/lib  -lssl -lcrypto
+gcc -g -I/usr/include  -Wall    -c -o server.o server.c
+gcc -g -I/usr/include  -Wall    -c -o wserver.o wserver.c
+gcc wserver.o server.o common.o  -o wserver -L/usr/lib  -lssl -lcrypto
+gcc -g -I/usr/include  -Wall    -c -o wclient2.o wclient2.c
+gcc wclient2.o client.o common.o  -o wclient2 -L/usr/lib  -lssl -lcrypto
+gcc -g -I/usr/include  -Wall    -c -o wserver2.o wserver2.c
+gcc wserver2.o server.o common.o  -o wserver2 -L/usr/lib  -lssl -lcrypto
+gcc -g -I/usr/include  -Wall    -c -o sclient.o sclient.c
+gcc -g -I/usr/include  -Wall    -c -o read_write.o read_write.c
+gcc sclient.o client.o read_write.o common.o  -o sclient -L/usr/lib  -lssl -lcrypto 

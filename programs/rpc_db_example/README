@@ -1,0 +1,27 @@
+1.  cc Uniq_Id.c -o Uniq_Id
+
+2.  Unique_Id --returns your program id
+
+3.  Change the first #define in db.x to the program number
+
+4.  rpcgen db.x
+
+5.  cc -c -o db.o -g db.c                 --compile the client
+
+6.  cc -c db_clnt.c                       --compile the client stub
+
+7.  cc -c db_xdr.c                        --compile the xdr filters
+
+8.  cc -o db db.o db_clnt.o db_xdr.o      --build the client
+
+9.  cc -c -o db_svc_proc.o db_svc_proc.c  --compile the server
+
+10. cc -c db_svc.c                        --compile the server stub
+
+11. cc -o db_svc db_svc_proc.o db_svc.o db_xdr.o  --build the server
+  
+12. db_svc                                -- run the server on one machine
+                                          -- send the request to that machine
+13. db <remote machine> 1 WEI             -- 1. retrieve record by name
+    db <remote machine> 2 333-33-3333     -- 2. retrieve record by ssn
+										  

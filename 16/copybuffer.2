@@ -1,0 +1,16 @@
+
+        while (1) {
+                alen = sizeof(fsin);
+                if (recvfrom(sock, buf, sizeof(buf), 0,
+                                (struct sockaddr *)&fsin, &alen) < 0)
+                        errexit("recvfrom: %s\n", strerror(errno));
+                (void) gettimeofday(&now,NULL);
+		printf("%x %x\n",now.tv_sec,now.tv_usec);
+		
+		now.tv_sec = htonl(now.tv_sec);
+		now.tv_usec = htonl(now.tv_usec);
+		memcpy(&out_buf,&now.tv_sec,4);
+		memcpy(&out_buf[4],&now.tv_usec,4);
+		(void) sendto(sock, &out_buf, sizeof(out_buf),0,(struct sockaddr*)&fsin,sizeof(fsin));
+		
+	}
