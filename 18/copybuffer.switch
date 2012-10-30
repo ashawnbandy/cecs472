@@ -1,0 +1,16 @@
+
+	/*
+        switch (argc) {
+        case 1:
+                break;
+        case 3:
+                service = argv[2];
+        case 2:
+                host = argv[1];
+                break;
+        default:
+                fprintf(stderr, "usage: <?> [host [port]]\n");
+                exit(1);
+        }
+	*/
+
