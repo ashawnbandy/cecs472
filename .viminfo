@@ -13,14 +13,14 @@
 # Command Line History (newest to oldest):
 :wq
 :q
-:r ../switch.service
-:w
+:r repair_structures.h
 :r repair_services.c
 :r
 :l
 :r repair_server.c
 :r repair_client.c
 :!gcc %
+:w
 :! gcc %
 :q!
 :r receive.c
@@ -102,7 +102,7 @@
 		now.tv_usec = htonl(now.tv_usec);
 		printf("%x %x\n",now.tv_sec,now.tv_usec);
 ""1	LINE	0
-	       char    *service = get_port();   /* service name or port number  */
+	/* repair.h */
 "2	LINE	0
 	  int sizeofbuffer = sizeof(int) + sizeof(int) + sizeof(float) + sizeofstring;
 "3	LINE	0
@@ -125,36 +125,32 @@
 	 
 
 # File marks:
-'0  48  0  ~/19/repair_cif.c
-'1  36  0  ~/19/repair_clnt.c
-'2  46  1  ~/19/repair_client.c
-'3  101  0  ~/19/repair_svc.c
-'4  68  0  ~/19/repair.h
-'5  3  27  ~/19/repair.x
-'6  1  0  ~/19/repair.h
-'7  143  10  ~/19/repair_hybrid.c
-'8  62  10  ~/19/repair_hybrid.c
-'9  105  0  ~/19/repair_hybrid.c
+'0  6  0  ~/19/repair_sif.c
+'1  23  0  ~/19/repair.h
+'2  1  13  ~/19/repair.x
+'3  38  10  ~/19/repair_hybrid.c
+'4  143  10  ~/19/repair_hybrid.c
+'5  62  10  ~/19/repair_hybrid.c
+'6  105  0  ~/19/repair_hybrid.c
+'7  74  0  ~/19/repair_hybrid.c
+'8  1  0  ~/19/repair_services.c
+'9  71  0  ~/19/repair_client.c
 
 # Jumplist (newest first):
--'  48  0  ~/19/repair_cif.c
--'  1  0  ~/19/repair_cif.c
--'  36  0  ~/19/repair_clnt.c
--'  1  0  ~/19/repair_clnt.c
--'  46  1  ~/19/repair_client.c
--'  101  0  ~/19/repair_svc.c
--'  1  0  ~/19/repair_svc.c
--'  104  0  ~/19/repair_client.c
+-'  6  0  ~/19/repair_sif.c
+-'  1  0  ~/19/repair_sif.c
+-'  23  0  ~/19/repair.h
 -'  68  0  ~/19/repair.h
--'  1  0  ~/19/repair.h
+-'  1  13  ~/19/repair.x
 -'  3  27  ~/19/repair.x
--'  12  22  ~/19/repair.x
+-'  38  10  ~/19/repair_hybrid.c
 -'  143  10  ~/19/repair_hybrid.c
 -'  62  10  ~/19/repair_hybrid.c
 -'  105  0  ~/19/repair_hybrid.c
 -'  74  0  ~/19/repair_hybrid.c
 -'  1  0  ~/19/repair_hybrid.c
 -'  1  0  ~/19/repair_services.c
+-'  71  0  ~/19/repair_client.c
 -'  1  0  ~/19/repair_client.c
 -'  7  0  ~/18b/receive.c
 -'  37  83  ~/18b/receive.c
@@ -236,8 +232,21 @@
 -'  1  0  ~/browserc.c
 -'  69  15  ~/17/pbrowserd.c
 -'  84  17  ~/17/pbrowserd.c
+-'  61  26  ~/17/pbrowserd.c
+-'  59  41  ~/17/pbrowserd.c
+-'  34  0  ~/15/homework15.tex
+-'  76  0  ~/15/homework15.tex
 
 # History of marks within files (newest to oldest):
+
+> ~/19/repair_sif.c
+	"	6	0
+	^	6	0
+	.	6	0
+	+	6	0
+
+> ~/19/repair.h
+	"	23	0
 
 > ~/19/repair_cif.c
 	"	48	0
@@ -434,9 +443,6 @@
 
 > ~/19/repair_svc.c
 	"	101	0
-
-> ~/19/repair.h
-	"	68	0
 
 > ~/Ttimed.c
 	"	1	0
@@ -1808,6 +1814,3 @@
 
 > ~/shells/browser.c
 	"	60	36
-
-> ~/9/TCPtime.c
-	"	54	0
