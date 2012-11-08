@@ -1,0 +1,14 @@
+/* repair.x */
+
+%#include "repair_structures.h"
+
+program REPAIRPROG {
+	version	REPAIR {
+		void 				QUEUE_CAR(struct queue_car_param) 	= 1;
+		void 				REPAIR_CAR(struct repair_car_param) 	= 2;
+		struct cars_in_garage_return 	CARS_IN_GARAGE(void) 	= 3;
+		int 				WORKTIME_LEFT(void) = 4;
+		void				CLEAR_GARAGE(void) = 5;
+		int				GARAGE_EMPTY(void) = 6;
+	} = 1;
+} = 0x20000064;

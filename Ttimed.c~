@@ -40,7 +40,7 @@ main(int argc, char *argv[])
                 service = argv[1];
                 break;
         default:
-                errexit("usage: TCPdaytimed [port]\n");
+                errexit("<klaxon>\n");
         }
 
         msock = passiveTCP(service, QLEN);
@@ -68,14 +68,5 @@ Ttimed(int fd)
 	memcpy(&buf,&now.tv_sec,4);
 	memcpy(&buf[4],&now.tv_usec,4);
 	(void) write(fd, buf, 8);
-	/*
-        char    *pts;                    pointer to time string       
-        time_t  now;                     current time                 
-        char    *ctime();
-
-       	(void) time(&now);
-        pts = ctime(&now);
-        (void) write(fd, pts, strlen(pts));
-	*/
         return 0;
 }

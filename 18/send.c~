@@ -1,3 +1,4 @@
+
 /*
  * A. Shawn Bandy F1
  * Assignment 18 - Sender
@@ -32,25 +33,30 @@ int main(int argc, char* argv[]){
 
 
   int sock;
+  char * test_string = "Hello there";
+  char buffer[1024];
+
+
   int test_number_a = 6;
   int test_number_b = 47;
   float test_number_c = -34.5;
-  char * test_string = "Hello there";
-  int sizeofbuffer = sizeof(int) + sizeof(int) + sizeof(float) + sizeof(test_string);
-  char buffer[sizeofbuffer+1];
-
+ 
+  printf("%s\n",test_string);
   XDR xdrobject;
   XDR *xdrstream = &xdrobject;
   /* XDR a message */
-  xdrmem_create(xdrstream, buffer, sizeofbuffer, XDR_ENCODE);
+  xdrmem_create(xdrstream, buffer, sizeof(buffer), XDR_ENCODE);
+  
   xdr_int(xdrstream, &test_number_a);
   xdr_int(xdrstream, &test_number_b);
   xdr_float(xdrstream, &test_number_c);
-  xdr_string(xdrstream, &test_string, sizeof(test_string)+1);
+  
+  
+  printf("(send) xdr string works? %i\n",xdr_wrapstring(xdrstream, &test_string));
   /* Get a socket (UDP) */ 
   sock = connectUDP(host, service);
   /* send the message */
-  write(sock, buffer, sizeofbuffer+1);
+  write(sock, buffer, sizeof(buffer));
   xdr_destroy(xdrstream);
   close(sock);
   return 0;

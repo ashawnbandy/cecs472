@@ -1,0 +1,12 @@
+       char    *service = get_port();   /* service name or port number  */
+
+        switch (argc) {
+        case    1:
+                break;
+        case    2:
+                service = argv[1];
+                break;
+        default:
+                errexit("<klaxon>\n");
+        }
+

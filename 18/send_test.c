@@ -36,10 +36,6 @@ int main(int argc, char* argv[]){
   char * test_string = "Hello there";
   char buffer[1024];
 
-
-  int test_number_a = 6;
-  int test_number_b = 47;
-  float test_number_c = -34.5;
  
   printf("%s\n",test_string);
   XDR xdrobject;
@@ -47,12 +43,7 @@ int main(int argc, char* argv[]){
   /* XDR a message */
   xdrmem_create(xdrstream, buffer, sizeof(buffer), XDR_ENCODE);
   
-  xdr_int(xdrstream, &test_number_a);
-  xdr_int(xdrstream, &test_number_b);
-  xdr_float(xdrstream, &test_number_c);
-  
-  
-  printf("(send) xdr string works? %i\n",xdr_wrapstring(xdrstream, &test_string));
+  printf("(send) xdr string works? %i\n",xdr_string(xdrstream, &test_string, strlen(test_string)));
   /* Get a socket (UDP) */ 
   sock = connectUDP(host, service);
   /* send the message */
